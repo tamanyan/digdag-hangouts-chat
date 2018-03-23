@@ -1,0 +1,27 @@
+_export:
+  plugin:
+    repositories:
+      # - file://${repos}
+      - https://jitpack.io
+    dependencies:
+      # - io.digdag.plugin:digdag-slack:0.1.2
+      - com.github.tamanyan:digdag-hangouts-chat:0.1.2
+  # Set Reqired params
+  webhook_url: https://chat.googleapis.com/v1/spaces/XXXXXXXX/messages?key=XXXXXX&token=XXXXX
+  # Set Option params
+  workflow_name: hangouts
+  ENV: develop
+
++step1-1:
+  echo>: "Next will be success!"
+
++step1-2:
+  hangouts>: good-template.yml
+
++step2-1:
+  echo>: "Next will be failed..."
+
++step2-2:
+  sh>: exit 1
+  _error:
+    hangouts>: danger-template.yml
