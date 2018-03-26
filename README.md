@@ -1,17 +1,18 @@
 # digdag-hangouts-chat
 
 [![](https://jitpack.io/v/tamanyan/digdag-hangouts-chat.svg)](https://jitpack.io/#tamanyan/digdag-hangouts-chat)
+[![](https://jitpack.io/v/tamanyan/digdag-hangouts-chat/month.svg?style=flat-square)](https://jitpack.io/#tamanyan/digdag-hangouts-chat)
 
 ## Description
 
 digdag-hangouts-chat is a plugin sending messages to Hangouts Chat.
 It can customize json templates for building messages.
 
-***DEMO:***  
+***DEMO:***
 
 |SUCCESS|FAILED|
 |---|---|
-|[![sucess.jpg](sample/imgs/sucess.jpg)](sample/imgs/sucess.jpg)|[![sample-danger.png](sample/imgs/failed.jpg)](sample/imgs/failed.jpg)|
+|[![success.jpg](sample/imgs/success.jpg)](sample/imgs/success.jpg)|[![sample-danger.png](sample/imgs/failed.jpg)](sample/imgs/failed.jpg)|
 
 ## Features
 
@@ -29,17 +30,17 @@ It can customize json templates for building messages.
 
 Also, you can see expamle workflow at [sample](https://github.com/tamanyan/digdag-hangouts-chat/tree/master/sample) directory.
 
-1. Create workflow file (e.g. slack.dig)
+1. Create workflow file (e.g. hangouts.dig)
 
 ```yaml
 _export:
   plugin:
     repositories:
-      - file://${repos}
-      # - https://jitpack.io
+      - https://jitpack.io
+      # - file://${repos}
     dependencies:
-      - io.digdag.plugin:digdag-hangouts-chat:0.1.5
-      # - com.github.tamanyan:digdag-hangouts-chat:0.1.5
+      - com.github.tamanyan:digdag-hangouts-chat:0.1.5
+      # - io.digdag.plugin:digdag-hangouts-chat:0.1.5
   # Set Reqired params
   webhook_url: https://chat.googleapis.com/v1/spaces/XXXXXXXXXXXXXXX/messages?key=XXXXXXXXXXXXX
   # Set Option params
@@ -58,7 +59,7 @@ _export:
 +step2-2:
   sh>: exit 1
   _error:
-    hangouts>: failed_template.json 
+    hangouts>: failed_template.json
 ```
 
 2. Create templates for Hangouts Message (e.g. success_template.json)
