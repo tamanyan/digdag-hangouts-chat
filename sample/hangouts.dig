@@ -4,8 +4,8 @@ _export:
       # - file://${repos}
       - https://jitpack.io
     dependencies:
-      # - io.digdag.plugin:digdag-slack:0.1.2
-      - com.github.tamanyan:digdag-hangouts-chat:0.1.2
+      - io.digdag.plugin:digdag-hangouts-chat:0.1.2
+      # - com.github.tamanyan:digdag-hangouts-chat:0.1.2
   # Set Reqired params
   webhook_url: https://chat.googleapis.com/v1/spaces/XXXXXXXX/messages?key=XXXXXX&token=XXXXX
   # Set Option params
