@@ -1,5 +1,7 @@
 # digdag-hangouts-chat
 
+[![](https://jitpack.io/v/tamanyan/digdag-hangouts-chat.svg)](https://jitpack.io/#tamanyan/digdag-hangouts-chat)
+
 ## Description
 
 digdag-hangouts-chat is a plugin sending messages to Hangouts Chat.
