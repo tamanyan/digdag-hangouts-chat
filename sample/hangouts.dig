@@ -7,16 +7,16 @@ _export:
       - io.digdag.plugin:digdag-hangouts-chat:0.1.5
       # - com.github.tamanyan:digdag-hangouts-chat:0.1.5
   # Set Reqired params
-  webhook_url: https://chat.googleapis.com/v1/spaces/XXXXXXXX/messages?key=XXXXXX&token=XXXXX
+  webhook_url: https://chat.googleapis.com/v1/spaces/XXXXXXXXXXXXXXX/messages?key=XXXXXXXXXXXXX
   # Set Option params
-  workflow_name: hangouts
+  workflow_name: Hangouts Workflow
   ENV: develop
 
 +step1-1:
   echo>: "Next will be success!"
 
 +step1-2:
-  hangouts>: good-template.yml
+  hangouts>: success_template.json
 
 +step2-1:
   echo>: "Next will be failed..."
@@ -24,4 +24,4 @@ _export:
 +step2-2:
   sh>: exit 1
   _error:
-    hangouts>: danger-template.yml
+    hangouts>: failed_template.json 

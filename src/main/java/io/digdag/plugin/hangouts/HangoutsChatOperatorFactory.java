@@ -11,6 +11,7 @@ import io.digdag.util.BaseOperator;
 import io.digdag.util.UserSecretTemplate;
 import okhttp3.Call;
 import okhttp3.FormBody;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -55,27 +56,28 @@ public class HangoutsChatOperatorFactory
         public TaskResult runTask()
         {
             Config params = request.getConfig().mergeDefault(
-                    request.getConfig().getNestedOrGetEmpty("slack"));
+                    request.getConfig().getNestedOrGetEmpty("hangouts"));
 
             if (!params.has("webhook_url")) {
                 throw new ConfigException("'webhook_url' is required");
             }
+
             String webhook_url = UserSecretTemplate.of(params.get("webhook_url", String.class))
                     .format(context.getSecrets());
 
             String message = workspace.templateCommand(templateEngine, params, "message", UTF_8);
-            String payload = HangoutsChatPayload.convertToJson(message);
 
-            this.postToHangoutsChat(webhook_url, payload);
+            // if validation is failed, throw exceptions
+            HangoutsChatMessageValidator.validate(message);
+
+            this.postToHangoutsChat(webhook_url, message);
 
             return TaskResult.empty(request);
         }
 
-        private void postToHangoutsChat(String url, String payload)
+        private void postToHangoutsChat(String url, String message)
         {
-            RequestBody body = new FormBody.Builder()
-                    .add("payload", payload)
-                    .build();
+            RequestBody body = RequestBody.create(MediaType.parse("application/json"), message);
 
             Request request = new Request.Builder()
                     .url(url)
@@ -86,8 +88,8 @@ public class HangoutsChatOperatorFactory
 
             try (Response response = call.execute()) {
                 if (!response.isSuccessful()) {
-                    String message = "status: " + response.code() + ", message: " + response.body().string();
-                    throw new IOException(message);
+                    String errorMessage = "status: " + response.code() + ", message: " + response.body().string();
+                    throw new IOException(errorMessage);
                 }
             }
             catch (IOException e) {

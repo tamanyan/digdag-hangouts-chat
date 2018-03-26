@@ -1,0 +1,32 @@
+{
+  "cards": [
+    {
+      "sections": [
+        {
+          "widgets": [
+            {
+              "keyValue": {
+                "topLabel": "Workflow Name",
+                "content": "${workflow_name}",
+                "contentMultiline": "false"
+              }
+            },
+            {
+              "keyValue": {
+                "topLabel": "Task Name",
+                "content": "${task_name}"
+              }
+            },
+            {
+              "keyValue": {
+                "topLabel": "Message",
+                "content": "Workflow executed successfully",
+                "contentMultiline": "true"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
