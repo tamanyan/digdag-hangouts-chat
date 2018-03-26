@@ -1,6 +1,7 @@
 *~
 /.gradle
 /build
+/bin
 .java-version
 .digdag
 
@@ -18,3 +19,6 @@
 .classpath
 .project
 .settings
+
+# vscode
+.vscode
